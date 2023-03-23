@@ -12,5 +12,5 @@ Basic Environment:
 
 Step1. __Download our pre-processed jsonl file from https://drive.google.com/file/d/1Y_3xn5qrnYG79CiQAJKPrw2coL3DSax3/view?usp=sharing, and put it into ./data/ folder as the source data file.__
 
-Step2. __Follow the illustration in \_4_run_MpbPPI_ddg_prediction.py file, to read the above jsonl file and run&evaluate MpbPPI in two different data splitting ways._
+Step2. __Follow the illustration in \_4_run_MpbPPI_ddg_prediction.py file, to read the above jsonl file and run&evaluate MpbPPI in two different data splitting ways.__
 
