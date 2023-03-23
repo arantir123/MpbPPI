@@ -12,7 +12,7 @@ Basic Environment:
 
 Step1. __Download our pre-processed jsonl file from https://drive.google.com/file/d/1Y_3xn5qrnYG79CiQAJKPrw2coL3DSax3/view?usp=sharing, and put it into ./data/ folder as the source data file.__
 
-Step2. __Follow the illustration in \_4_run_MpbPPI_ddg_prediction.py file, to read the above jsonl data file and run&evaluate MpbPPI for downstream ddG predictions in two different data splitting ways.__
+Step2. __Follow the illustration in \_4_run_MpbPPI_ddg_prediction.py, to read the above jsonl data file and run&evaluate MpbPPI for downstream ddG predictions in two different data splitting ways.__
 
 __A running example (including training and evaluation):__
 
