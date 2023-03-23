@@ -4,7 +4,7 @@ A multi-task pre-training-based equivariant approach for the prediction of the e
 How to use it:
 
 Basic Environment:
-* __Python 3.6.13__
-* __Pytorch 1.10.2__
+* __Python 3.9.13__
+* __Pytorch 1.12.1__
 * __CUDA tool kit 11.3.1__
-* __dgl-cuda11.3__
+* __Pytorch Geometric for PyTorch 1.12.* and CUDA 11.3__
