@@ -17,5 +17,10 @@ Step2. __Follow the illustration in \_4_run_MpbPPI_ddg_prediction.py file, to re
 __A running example (including training and evaluation):__
 
 python \_4_run_MpbPPI_ddg_prediction.py --data_split_mode 'CV10_random' (mutation-level tenfold cross-validation)
+
 python \_4_run_MpbPPI_ddg_prediction.py --data_split_mode 'complex' (widetype PPI complex type-based cross-validation)
+
+__The scripts for the full preprocessing pipeline as well as our collected pre-training data and corresponding coda will be released upon acceptance.__
+
+
 
