@@ -10,7 +10,7 @@ __Basic Environment:__
 * Pytorch Geometric (PyG) for PyTorch 1.12.* and CUDA 11.3
 
 
-Step1. __Download our pre-processed jsonl file from https://drive.google.com/file/d/1Y_3xn5qrnYG79CiQAJKPrw2coL3DSax3/view?usp=sharing, and put it into ./data/ folder as the downstream source data file.__
+Step1. __Download our pre-processed jsonl file (based on the best mutant-type PPI complex generation tool FoldX) from https://drive.google.com/file/d/1Y_3xn5qrnYG79CiQAJKPrw2coL3DSax3/view?usp=sharing, and put it into ./data/ folder as the downstream source data file.__
 
 Step2. __Follow the illustration in \_4_run_MpbPPI_ddg_prediction.py, to read the above jsonl file and run&evaluate MpbPPI for downstream ddG predictions in two different data splitting ways.__
 
