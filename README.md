@@ -20,7 +20,7 @@ python \_4_run_MpbPPI_ddg_prediction.py --data_split_mode 'CV10_random' (mutatio
 
 python \_4_run_MpbPPI_ddg_prediction.py --data_split_mode 'complex' (widetype PPI complex type-based cross-validation)
 
-__The scripts for the full pre-processing pipeline as well as our collected pre-training data and corresponding training script will be released upon acceptance.__
+__The scripts for the full pre-processing pipeline as well as our collected pre-training data and corresponding pre-training script will be released upon acceptance.__
 
 
 
