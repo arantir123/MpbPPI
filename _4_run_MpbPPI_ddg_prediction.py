@@ -12,7 +12,8 @@ import random
 from config import ap
 import os
 from torch_geometric.nn.pool import global_max_pool, global_mean_pool
-from _3_generate_residuefeats_finetuning import FinetuningCVDataset, FinetuningGraphDataset, BatchSampler
+from _3_generate_residuefeats_finetuning import FinetuningCVDataset, FinetuningGraphDataset
+from _3_generate_residuefeats_pretraining import BatchSampler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.ensemble import GradientBoostingRegressor
 import scipy.stats
@@ -70,6 +71,9 @@ def main(args):
     print('model_save_pretraining:', model_save_pretraining)
     print('model_save_finetuning:', model_save_finetuning)
 
+    if not os.path.exists('storage_finetuning/'):
+        os.makedirs('storage_finetuning/')
+
     if args.data_split_mode == 'identity' and args.data_split_tag == '_noval':
         with open(args.data_dir + f'{args.set_name}_{args.data_split_mode}_data_split{args.data_split_tag}.json') as f:
             split_list = [json.load(f)]
@@ -83,8 +87,7 @@ def main(args):
         print('current script does not support current data splitting')
         raise NotImplementedError
 
-    MSE_total, RMSE_total, MAE_total, PEARSON_total = [], [], [], []
-    # MSE_extra_total, RMSE_extra_total, MAE_extra_total, PEARSON_extra_total = [], [], [], []
+    MSE_total, RMSE_total, MAE_total, PEARSON_total, label_total, prediction_total, name_total = [], [], [], [], [], [], []
     for fold in range(len(split_list)):
         print('current fold:', fold)
         if os.path.exists('./storage_pretraining/' + model_save_pretraining):
@@ -103,11 +106,14 @@ def main(args):
 
             # main training & evaluation process
             # MSE_test, RMSE_test, MAE_test, PEARSON_test, MSE_extra_test, RMSE_extra_test, MAE_extra_test, PEARSON_extra_test = finetuning(model_save_pretraining, model_save_finetuning, model, decoder, train_set, val_set, args)
-            MSE_test, RMSE_test, MAE_test, PEARSON_test = finetuning(model_save_pretraining, model_save_finetuning, model, decoder, train_set, val_set, args)
+            MSE_test, RMSE_test, MAE_test, PEARSON_test, label_test, prediction_test, name_test = finetuning(model_save_pretraining, model_save_finetuning, model, decoder, train_set, val_set, args)
             MSE_total.append(MSE_test)
             RMSE_total.append(RMSE_test)
             MAE_total.append(MAE_test)
             PEARSON_total.append(PEARSON_test)
+            name_total.append(name_test)
+            prediction_total.append(prediction_test)
+            label_total.append(label_test)
 
         else:
             print('the specified pretraining model cannot be found in: {},'.format('./storage_pretraining/' + model_save_pretraining), 'fail to finetune the model')
@@ -118,19 +124,14 @@ def main(args):
     print('node_dim:', node_dim, 'edge_dim:', edge_dim, 'splitting_seed:', splitting_seed, 'mutation_source:', mutation_source, 'add_mut_to_interface:', add_mut_to_interface)
     print('*** Above Are All Hyper Parameters ***')
 
-    MSE_total, RMSE_total, MAE_total, PEARSON_total = np.mean(MSE_total), np.mean(RMSE_total), np.mean(MAE_total), np.mean(PEARSON_total)
-    # MSE_extra_total, RMSE_extra_total, MAE_extra_total, PEARSON_extra_total = np.mean(MSE_extra_total), np.mean(RMSE_extra_total), np.mean(MAE_extra_total), np.mean(PEARSON_extra_total)
-    print('average MSE, RMSE, MAE, Pearson on test set:', MSE_total, RMSE_total, MAE_total, PEARSON_total)
-    # print('average MSE, RMSE, MAE, Pearson on extra test set:', MSE_extra_total, RMSE_extra_total, MAE_extra_total, PEARSON_extra_total)
+    # print overall evaluation results
+    print('average MSE, RMSE, MAE, Pearson on test set:', np.mean(MSE_total), np.mean(RMSE_total), np.mean(MAE_total), np.mean(PEARSON_total))
 
-    if not os.path.exists('storage_finetuning/'):
-        os.makedirs('storage_finetuning/')
-
-    # pd_columns = ['MSE_total', 'RMSE_total', 'MAE_total', 'PEARSON_total', 'MSE_extra_total', 'RMSE_extra_total', 'MAE_extra_total', 'PEARSON_extra_total']
-    # save_file = pd.DataFrame(np.array([MSE_total, RMSE_total, MAE_total, PEARSON_total, MSE_extra_total, RMSE_extra_total, MAE_extra_total, PEARSON_extra_total]).reshape(1, -1), columns=pd_columns)
-    pd_columns = ['MSE_total', 'RMSE_total', 'MAE_total', 'PEARSON_total']
-    save_file = pd.DataFrame(np.array([MSE_total, RMSE_total, MAE_total, PEARSON_total]).reshape(1, -1), columns=pd_columns)
-    save_file.to_csv('./storage_finetuning/crossvalidation_{}.csv'.format(model_save_finetuning.split('.')[0]))
+    # output overall prediction results
+    pd_columns = ['Name_total', 'Label_total', 'Prediction_total']
+    name_total, label_total, prediction_total = np.concatenate(name_total).reshape(-1, 1), np.concatenate(label_total).reshape(-1, 1), np.concatenate(prediction_total).reshape(-1, 1)
+    save_file = pd.DataFrame(np.concatenate([name_total, label_total, prediction_total], axis=1), columns=pd_columns)
+    save_file.to_csv('./storage_finetuning/crossvalidation_{}_{}{}.csv'.format(args.set_name, args.data_split_mode, mutation_source))
 
     print('model_save_pretraining:', model_save_pretraining)
     print('model_save_finetuning:', model_save_finetuning)
@@ -148,13 +149,17 @@ def finetuning(model_save_pretraining, model_save_finetuning, model, decoder, tr
 
     # training, becuase in every fold, samples in training and valiation sets are different, thus in different folds, the batch/dataloader organization ways/orders are different
     with torch.no_grad():
-        train_X, train_Y = loop(model, train_loader, args)
+        train_X, train_Y, train_name = loop(model, train_loader, args)
     train_X = np.round(train_X, 3)
+    # print(train_Y, train_Y.shape) (580, )
+    # print(train_name, train_name.shape) (580, )
     print('start the GBT decoder training ...')
     decoder.fit(train_X, train_Y)
+
     # test
     with torch.no_grad():
-        test_X, test_Y = loop(model, val_loader, args)
+        # test_name is organized as np.array format
+        test_X, test_Y, test_name = loop(model, val_loader, args)
     test_X = np.round(test_X, 3)
     # test_prediction = np.clip(decoder.predict(test_X), -8.0, 8.0)
     test_prediction = decoder.predict(test_X)
@@ -168,7 +173,7 @@ def finetuning(model_save_pretraining, model_save_finetuning, model, decoder, tr
     print(f'total elapsed time of normal training and testing in current fold: {t1 - t0:.4f}')
     print(f'normal evaluation metrics in current fold, MSE: {MSE_test:.4f}, RMSE: {RMSE_test:.4f}, MAE: {MAE_test:.4f}, Pearson: {PEARSON_test:.4f}')
 
-    return MSE_test, RMSE_test, MAE_test, PEARSON_test
+    return MSE_test, RMSE_test, MAE_test, PEARSON_test, test_Y, test_prediction, test_name
 
 
 def loop(model, dataloader, args=None):
@@ -176,6 +181,7 @@ def loop(model, dataloader, args=None):
 
     encoder_embeddings = []
     ddg_label_list = []
+    name_list = []
     for batch in t:
         batch = batch.to(device)
         # gvp encoder input
@@ -228,13 +234,15 @@ def loop(model, dataloader, args=None):
         ddg_label = batch.ddg
         ddg_label_detach = ddg_label.cpu().detach().numpy()
         ddg_label_list.append(ddg_label_detach)
+        name_list.append(batch.name)
 
         torch.cuda.empty_cache()
 
     encoder_embeddings = np.concatenate(encoder_embeddings)
     ddg_label_list = np.concatenate(ddg_label_list)
+    name_list = np.concatenate(name_list)
 
-    return encoder_embeddings, ddg_label_list
+    return encoder_embeddings, ddg_label_list, name_list
 
 
 if __name__ == '__main__':
@@ -242,14 +250,14 @@ if __name__ == '__main__':
 
     # *** downstream setting related hyperparameters ***
     # the root path to store data source files
-    args.data_dir = './data/'
-    # the specified downstream ddg dataset names, S645/M1101/S1131/S4169
+    args.data_dir = 'data/'
+    # the specified downstream ddg dataset names
     args.set_name = 'S4169'
     # data_split_mode: 'CV10_random'/'complex'
     args.data_split_mode = 'CV10_random'
     # extra tag for specifying required data splitting files (default: '')
     args.data_split_tag = ''
-    args.num_workers = 0 # 4
+    args.num_workers = 4 # 4
 
     # GBT related hyperparameters
     args.learning_rate = 0.001
