@@ -12,8 +12,7 @@ import random
 from config import ap
 import os
 from torch_geometric.nn.pool import global_max_pool, global_mean_pool
-from _3_generate_residuefeats_finetuning import FinetuningCVDataset, FinetuningGraphDataset
-from _3_generate_residuefeats_pretraining import BatchSampler
+from _3_generate_residuefeats_finetuning import FinetuningCVDataset, FinetuningGraphDataset, BatchSampler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.ensemble import GradientBoostingRegressor
 import scipy.stats
