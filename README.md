@@ -22,7 +22,7 @@ python \_4_run_MpbPPI_ddg_prediction.py --data_split_mode 'complex' (wide-type P
 
 __The scripts for the full pre-processing pipeline as well as our collected pre-training data and corresponding pre-training script will be released upon acceptance.__
 
-__MIT License__
+### MIT License
 
 Copyright (c) [2023] [Yang Yue]
 
