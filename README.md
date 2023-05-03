@@ -15,6 +15,7 @@ Step1. __Download our pre-processed jsonl file (generated based on the mutant-ty
 Step2. __Follow the illustration in \_4_run_MpbPPI_ddg_prediction.py, to read the above jsonl file and run&evaluate MpbPPI for downstream ddG predictions in two different data splitting ways.__
 
 __A running example (including training and evaluation to create the similar results reported in the manuscript):__
+__After the environment configuration, usually several hours are needed to finishing running the demo code.__
 
 python \_4_run_MpbPPI_ddg_prediction.py --data_split_mode 'CV10_random' (mutation-level tenfold cross-validation)
 
