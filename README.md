@@ -3,7 +3,7 @@
 
 __How to use it:__
 
-__Basic Environment (Windows or Linux):__
+__Basic Environment (Windows or Linux, the specific installation time depends on your system configuration):__
 * Python 3.9.13
 * Pytorch 1.12.1
 * CUDA tool kit 11.3.1
