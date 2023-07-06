@@ -71,7 +71,7 @@ __AlphaFold2:__
 
 2. For AlphaFold2, we used a locally installed version of the publicly available ColabFold4 to predict mutant structures. The amino acid sequence was modified to reflect the desired mutations, and this updated sequence was used as input for the AlphaFold2. Following the AlphaFold2 pipeline, we performed a MSA search with MMseqs2 on the UniRef30 database5 and generated five models for each sample. These models were subsequently relaxed with the Amber program and ranked. We ultimately selected the top-ranked structure for ddG prediction tasks (all information of above operations can be found in the provided link).
 
-__Step3B. SASA calculation for WT and MT PDB files in each dataset__
+__Step2C. SASA calculation for WT and MT PDB files in each dataset__
 
 1. After WT side chain completion and mutant structure generation, we need to calculate SASA for each WT/MT PDBs as part of the residue node feature (all other features can be generated automatically based on our code).
 
