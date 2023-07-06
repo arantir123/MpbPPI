@@ -38,7 +38,7 @@ AlphaFold2:
 Following the AlphaFold2 pipeline, we performed a MSA search with MMseqs2 on the UniRef30 database5 and generated five models for each sample. These models were subsequently relaxed with the Amber program and ranked.
 We ultimately selected the top-ranked structure for ddG prediction tasks (*all information of above operations can be found in the provided link*).
 
-Step3B. SASA calculation for WT and MT PDB files in each dataset
+Step2C. SASA calculation for WT and MT PDB files in each dataset
 1. After WT side chain completion and mutant structure generation, we need to calculate SASA for each WT/MT PDBs as part of the residue node feature (all other features can be generated automatically based on our code)
 2. After SASA calculation, we can use original PDB files and corresponding SASA files to generate the input json file for GEE encoder (example of SASA file data structure can be found in ./data/M1101_foldx_cleaned/4_mt_dasa_*)
 
