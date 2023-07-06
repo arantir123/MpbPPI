@@ -1,4 +1,4 @@
-* Steps about how to generate required data for model pretraining and model fintuning *
+* Steps about how to generate required data for model pre-training and model downstream predictions *
 * In this implementation, the names MpbPPI and EquiPPI of our framework may be used interchangeably *
 
 Step1. cleaning data, the aim is to only retain 'ATOM' (but not removing all H atoms here) and 'TER' line in each pdb file for keeping consistency between different datasets.
