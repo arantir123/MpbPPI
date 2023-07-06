@@ -7,7 +7,7 @@ __Basic Environment Configuation (Windows or Linux, the specific installation ti
 * CUDA tool kit 11.3.1
 * Pytorch Geometric (PyG) for PyTorch 1.12.* and CUDA 11.3
 
-## Steps about how to generate required data for model pretraining and model fintuning ##
+## Steps about how to generate required data for model pre-training and model downstream predictions ##
 
 __In this implementation, the names MpbPPI and EquiPPI of our framework may be used interchangeably__
 
