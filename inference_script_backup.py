@@ -36,7 +36,7 @@ splitting_seed = 256
 mutation_source = '_foldx'
 # indicate whether to add mutation cr_token into the interface cr_token set (only set to True for M1101)
 # for M1101 to solve the cases that interface cannot be retrieved by pymol
-add_mut_to_interface = True
+add_mut_to_interface = False
 # intermediate feat dim in gvp
 node_dim = (256, 16)
 edge_dim = (32, 1)
@@ -251,7 +251,7 @@ if __name__ == '__main__':
     # the root path to store data source files
     args.data_dir = 'data/'
     # the specified downstream ddg dataset names
-    args.set_name = 'M1101'
+    args.set_name = 'S4169'
     # data_split_mode: 'CV10_random'/'complex'
     args.data_split_mode = 'CV10_random'
     # extra tag for specifying required data splitting files (default: '')
