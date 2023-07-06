@@ -50,8 +50,8 @@ For pretraining set:
 For downstream sets:
 1. run _3_generate_interface_mutation.py (for generating json files storing mutation site, interface site, and ddg label information based on downstream *wildtype* proteins)
 2. run _3_generate_json_input.py (task='finetuning', for generating json files), need to ensure file number of WT coordinate, WT SASA, MT coordinate, and MT SASA folders should be the same
-2. run _3_datasplit_downstream.py (for splitting the downstream set into train/val/test sets based on different modes)
-3. call _3_generate_residuefeats_finetuning.py (for defining Dataloader for finetuning)
+3. run _3_datasplit_downstream.py (for splitting the downstream set into train/val/test sets based on different modes)
+4. call _3_generate_residuefeats_finetuning.py (for defining Dataloader for finetuning)
 Note:
 1. for pretraining set, there have been no non-natural AAs (as the corresponding proteins are removed in Step2), and in current plan, non-natural AAs in downstream sets will be removed in this step (just remove the non-natural AAs instead of complete proteins)
 
