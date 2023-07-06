@@ -1,13 +1,13 @@
 # MpbPPI
 ### A multi-task pre-training-based equivariant approach for the prediction of the effect of amino acid mutations on protein-protein interactions
 
-__How to use it:__
-
 __Basic Environment Configuation (Windows or Linux, the specific installation time depends on your system configuration):__
 * Python 3.9.13
 * Pytorch 1.12.1
 * CUDA tool kit 11.3.1
 * Pytorch Geometric (PyG) for PyTorch 1.12.* and CUDA 11.3
+
+__How to use it:__
 
 __Steps about how to generate required data for model pretraining and model fintuning__
 __In this implementation, the names MpbPPI and EquiPPI of our framework may be used interchangeably__
