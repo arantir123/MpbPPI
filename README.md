@@ -109,7 +109,7 @@ For downstream sets: run _4_run_MpbPPI_ddg_prediction.py.
 
 ## Quick start ##
 
-__We have provided our pre-processed source data jsonl files (including the downstream S4169 dataset, etc.) in https://drive.google.com/file/d/1nIB3tH0CEYxA1CqFKbA1uCmeecg_8Ni3/view?usp=drive_link for a quick start.__ 
+__We have provided our pre-processed source data jsonl files (including the downstream S4169 dataset, etc.) in https://drive.google.com/file/d/13TJe9QTVfXR7Dm3LW4BoVYuC2N28MU8C/view?usp=sharing for a quick start.__ 
 
 Step1. __Download our pre-processed jsonl files in above link, and put it into the ./data/ folder as the source data file.__
 
