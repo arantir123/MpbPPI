@@ -103,7 +103,7 @@ __Note:__
 
 __Step4. Model training and validation, the aim is to train and validate model based on corresponding data__
 
-For pretraining set: run _4_run_pretraining_MpbPPI\_*.py.
+For pre-training set: run _4_run_pretraining_MpbPPI\_*.py.
 
 For downstream sets: run _4_run_MpbPPI_ddg_prediction.py.
 
