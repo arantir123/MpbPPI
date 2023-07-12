@@ -1,0 +1,25 @@
+# This file was created Wed Jul 12 16:37:44 2023
+# Created by:
+#                       :-) GROMACS - gmx sasa, 2022.1 (-:
+# 
+# Executable:   /home/ls/Work/softwares/Gromacs/gromacs-2022.1/bin/gmx_mpi
+# Data prefix:  /home/ls/Work/softwares/Gromacs/gromacs-2022.1
+# Working dir:  /data/Work/8_ppi/2_benchmark_foldx/dasa_demo
+# Command line:
+#   gmx_mpi sasa -f 1AK4__1.D.pdb -s 1AK4__1.D.pdb -or 1AK4__1.D.pdb.xvg
+# gmx sasa is part of G R O M A C S:
+#
+# God Rules Over Mankind, Animals, Cosmos and Such
+#
+@    title "Solvent Accessible Surface"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "Area (nm\S2\N)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Total"
+      0.000   87.063
