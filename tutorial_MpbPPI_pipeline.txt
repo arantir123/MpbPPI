@@ -1,7 +1,7 @@
 * Steps about how to generate required data for model pre-training and model downstream predictions *
 * In this implementation, the names MpbPPI and EquiPPI of our framework may be used interchangeably *
 
-Step1. cleaning data, the aim is to only retain 'ATOM' (but not removing all H atoms here) and 'TER' line in each pdb file for keeping consistency between different datasets.
+Step1. cleaning data, the aim is to only retain 'ATOM' (but not removing all H atoms here) and 'TER' line in each pdb file for keeping consistency between different datasets
 For pretraining set: run _1_run_cleaning_pdb.py to clean pdbs (the 'cleaned' suffix will be added to the output folder based on the input folder name)
 For downstream sets: same to the above (mainly for widetype pdbs, because the mutation pdbs will be generated based on 'cleaned' widetype pdbs)
 Note:
@@ -30,13 +30,13 @@ FoldX:
 4. in _5_foldx_mutation_prediction.py, we provide an example ("mode == 'calling" + "foldx_mutation_prediction('./data/', 'M1101_foldx_cleaned/', 139)") to demonstrate how FoldX works
 MODELLER:
 1. the relevant link: https://salilab.org/modeller/10.4/release.html
-2. for MODELLER, the structure for a single mutation or multiple point mutations was modeled based on its wild-type structure using homologous modeling with MODELLER 10.4.
-We added chain break ('/') characters to the alignment file. Then we used the AutoModel class to build models of the complex.
+2. for MODELLER, the structure for a single mutation or multiple point mutations was modeled based on its wild-type structure using homologous modeling with MODELLER 10.4
+We added chain break ('/') characters to the alignment file. Then we used the AutoModel class to build models of the complex
 AlphaFold2:
 1. the relevant link: https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb
-2. for AlphaFold2, we used a locally installed version of the publicly available ColabFold4 to predict mutant structures. The amino acid sequence was modified to reflect the desired mutations, and this updated sequence was used as input for the AlphaFold2.
-Following the AlphaFold2 pipeline, we performed a MSA search with MMseqs2 on the UniRef30 database5 and generated five models for each sample. These models were subsequently relaxed with the Amber program and ranked.
-We ultimately selected the top-ranked structure for ddG prediction tasks (*all information of above operations can be found in the provided link*).
+2. for AlphaFold2, we used a locally installed version of the publicly available ColabFold4 to predict mutant structures. The amino acid sequence was modified to reflect the desired mutations, and this updated sequence was used as input for the AlphaFold2
+Following the AlphaFold2 pipeline, we performed a MSA search with MMseqs2 on the UniRef30 database5 and generated five models for each sample. These models were subsequently relaxed with the Amber program and ranked
+We ultimately selected the top-ranked structure for ddG prediction tasks (*all information of above operations can be found in the provided link*)
 
 Step2C. SASA calculation for WT and MT PDB files in each dataset
 1. After WT side chain completion and mutant structure generation, we need to calculate SASA for each WT/MT PDBs as part of the residue node feature (all other features can be generated automatically based on our code)
