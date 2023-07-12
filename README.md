@@ -101,7 +101,7 @@ __For downstream sets:__
 
 __Note:__
 
-1. for pretraining set, there have been no non-natural AAs (as the corresponding proteins are removed in Step2), and in current plan, non-natural AAs in downstream sets will be removed in this step (just remove the non-natural AAs instead of complete proteins).
+1. For pretraining set, there have been no non-natural AAs (as the corresponding proteins are removed in Step2), and in current plan, non-natural AAs in downstream sets will be removed in this step (just remove the non-natural AAs instead of complete proteins).
 
 __Step4. Model training and validation, the aim is to train and validate model based on corresponding data__
 
