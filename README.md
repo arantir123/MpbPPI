@@ -75,7 +75,9 @@ __Step2C. SASA calculation for WT and MT PDB files in each dataset__
 
 1. After WT side chain completion and mutant structure generation, we need to calculate SASA for each WT/MT PDBs as part of the residue node feature (all other features can be generated automatically based on our code).
 
-2. After SASA calculation, we can use original PDB files and corresponding SASA files to generate the input json file for GEE encoder (example of SASA file data structure can be found in ./data/M1101_foldx_cleaned/4_mt_dasa_*).
+2. The SASA generation script and corresponding description can be found in ./dasa_demo/get_sasa.sh (based on the GROMACS tool).
+    
+3. After SASA calculation, we can use original PDB files and corresponding SASA files to generate the input json file for GEE encoder (example of SASA file data structure can be found in ./data/M1101_foldx_cleaned/4_mt_dasa_*).
 
 __Step3. Definition of pytorch Dataset and Dataloader, the aim is to generate json files containing source data, label, data split for model training and to define corresponding Dataloader for further processing them__
 
