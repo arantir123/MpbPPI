@@ -115,9 +115,9 @@ __We have provided our pre-processed source data jsonl files (including the pret
 
 Step1. __Download our pre-processed jsonl files in above link, and put it into the ./data/ folder as the source data file.__
 
-Step2. __Follow the illustration in \_4_run_MpbPPI_ddg_prediction.py, to read the above jsonl file and run&evaluate MpbPPI for downstream ddG predictions in two different data splitting ways (for pre-training, the procedure is similar).__
+Step2. __Follow the illustration in \_4_run_MpbPPI_ddg_prediction.py, to read the above jsonl file and run&evaluate MpbPPI for downstream ddG predictions in two different data splitting ways (for pre-training, the procedure is similar based on \_4_run_pretraining_MpbPPI_aadenoising_rgraph.py script).__
 
-__A running example (including training and evaluation to create the similar results reported in the manuscript):__
+__A running example (including the training and evaluation to create the similar results reported in the manuscript):__
 
 __After the environment configuration, usually several hours are needed to finish running the demo code.__
 
