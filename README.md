@@ -23,7 +23,7 @@ __Note:__
 
 2. The mutant sample number involving non-natural AAs is 24 covering 5 proteins, and these proteins are only in S4169 downstream set.
 
-__Step2A. Side chain completion, the aim is to complete side chain atoms of cleaned pdbs in pretraining set and downstream widetype(WT) sets__
+__Step2A. Side chain completion, the aim is to complete side chain atoms of cleaned pdbs in pretraining set and downstream widetype (WT) sets__
 
 For pretraining set: run _2_completing_sidechain_pretraining.py (add the 'foldx' suffix to the output folder name).
 
