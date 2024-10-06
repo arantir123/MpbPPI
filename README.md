@@ -1,7 +1,7 @@
 # MpbPPI
 ### A multi-task pre-training-based equivariant approach for the prediction of the effect of amino acid mutations on protein-protein interactions
 
-__The accepted version link: https://academic.oup.com/bib/article/24/5/bbad310/7256145__
+__The accepted version link: [https://academic.oup.com/bib/article/24/5/bbad310/7256145]__
 
 __Basic Environment Configuation (Windows or Linux, the specific installation time depends on your system configuration):__
 * Python 3.9.13
